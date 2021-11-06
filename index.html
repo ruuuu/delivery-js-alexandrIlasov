@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/wow.min.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <!--defer он поставит бразуер на скачивание скрипта main.js и продллжит считывание разметки дальше(тк в скрипте идет обращение к  элементам верстки), как только бразер считве всю рамзетку, тогда и запустится скрипт(в нем элементы уже будут доступны)-->
-
+    <script src="js/auth.js" defer></script>
+    <!--defer он поставит бразуер на скачивание скрипта auth.js и продллжит считывание разметки дальше(тк в скрипте идет обращение к  элементам верстки), как только бразер считве всю рамзетку, тогда и запустится скрипт(в нем элементы уже будут доступны)-->
+    <script src="js/partners.js" defer></script>
+    <script src="js/menu.js" defer></script>
 </head>
 
 <body>
@@ -499,6 +500,7 @@
                     <div class="footer-buttons">
                         <button class="button button-primary button-login" type="submit">Войти</button>
                     </div>
+                    <p class="error">Заполните логин</p>
                 </div>
             </form>
         </div>

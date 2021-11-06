@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/wow.min.js" defer></script>
-    <script src="js/main.js" defer></script>
+    <script src="js/auth.js" defer></script>
 
 </head>
 
@@ -28,13 +28,17 @@
             <!--флекс элемент-->
             <div class="buttons">
                 <!--флекс элемент,ктрый сам флекс контейнер-->
-                <button class="button button-primary">
+                <span class="user-name"></span>
+                <button class="button button-primary buttun-auth">
                     <img class="button-icon" src="img/icon/user.svg" width="16" height="20" alt="user_button">
                     <span class="button-text">Войти</span></button>
                 <button class="button" id="cart-button">
                     <img class="button-icon" src="img/icon/shopping-cart.svg" width="16" height="24"
                         alt="shopping_button">
                     <span class="button-text">Корзина</span>
+                </button>
+                <button class="button button-primary  button-out">
+                    <span class="button-text">Выйти</span>
                 </button>
             </div>
         </header>
@@ -332,6 +336,37 @@
                     <button class="button">Отмена</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal-auth">
+        <!--мод окно автроизации-->
+        <div class="modal-dialog modal-dialog-auth">
+            <button class="close-auth">&times;</button>
+
+            <form id="logInForm">
+                <fieldset class="modal-body">
+                    <legend class="modal-title">Авторизация</legend>
+                    <label class="label-auth">
+                        <span>Логин</span>
+                        <input id="login" type="text">
+                        <span id="input-error"></span>
+                    </label>
+                    <label class="label-auth">
+                        <span>Пароль</span>
+                        <input id="password" type="password">
+                    </label>
+                </fieldset>
+                <!-- /.modal-body -->
+                <div class="modal-footer">
+                    <div class="footer-buttons">
+                        <button class="button button-primary button-login" type="submit">Войти</button>
+                    </div>
+                    <p class="error">Заполните логин</p>
+                </div>
+            </form>
         </div>
     </div>
 
