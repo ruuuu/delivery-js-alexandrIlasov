@@ -2,9 +2,9 @@ const menu = () => {
 
     const cardsMenu = document.querySelector('.cards-menu'); // спсиок блюд, контенер для блюд
 
-    const cartArray = []; // массив объектов {name, price, count}  Корзины, будем ее заполнять обхектами(блюдами выбранными) 
+    const cartArray = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []; // массив объектов {name, price, count}  Корзины, будем ее заполнять обхектами(блюдами выбранными) 
 
-    const changeTitle = (restaurant) => { // restaurant = {iamge, name. price, kitchen, stars}
+    const changeTitle = (restaurant) => { // restaurant = {image, name, price, kitchen, stars}
         console.log(restaurant);
         const restauranTtitle = document.querySelector('.restaurant-title');
         restauranTtitle.textContent = restaurant.name;
@@ -21,27 +21,30 @@ const menu = () => {
 
 
 
-    const addToCard = (cartItem) => { // добавлzет  объект(котрый передаем) в localStorge, проверяем есть ли этот объект в корзине
-        if (cartArray.some((item) => item.id === cartItem.id)) {  // перебиарая массив,  проверяем есть ли в массииве элемент cartItem, сверяем по id  блюда
-            console.log('таоке людо уже есть в массиве');
+    const addToCard = (cartItem) => { // добавляет  объект(котрый передаем) в localStorge, проверяем есть ли этот объект в корзине
+        if (cartArray.some((item) => item.id === cartItem.id)) {  // перебирая массив cartArray [{name: name, price: price, id: id, count: 1}, {name: name, price: price, id: id, count: 1}, {}, {}],  проверяем есть ли в массииве элемент cartItem(константа), сверяем по id  блюда
+            console.log('такое людо уже есть в массиве блюд');
+            cartArray.map((item) => { //  переьираем массив блюд
+                if (item.id === cartItem.id) item.count++;
+                return item;
+            });
         }
         else {
-            cartArray.push(cartItem); // ОСТАНОВИЛАСЬ НА  16:33
+            cartArray.push(cartItem);
         }
 
-
-        localStorage.setItem('cart', JSON.stringify(cartArray)); // запсиывем в лок ханилще массив объектов 
-
+        localStorage.setItem('cart', JSON.stringify(cartArray)); // записывем в localStorage массив объектов(блюд) 
     };
 
 
-    const renderItems = (data) => { // data = [{блюдо}, {блюдо}, {блюдо}, {блюдо}}]
-        //console.log(data);
-        //              item= блюдо
-        data.forEach(({ description, id, image, name, price }) => { // перебираем массив блюд [{}, {}, {}, {}}],  десрутктризация
+    const renderItems = (data) => { // data = [{name: name, price: price, id: id, count: 1}, {name: name, price: price, id: id, count: 1}, {блюдо}, {блюдо}}]
+        console.log('data', data);  // массив блюд
+        //              item = блюдо
+        data.forEach(({ description, id, image, name, price }) => { // перебираем массив блюд [{name: name, price: price, id: id, count: 1}, {}, {}, {}}],  десруктуризация
 
             const card = document.createElement('div'); // <div> </div> текущая карта(блюдо)
             card.classList.add('card'); // <div class="card"> </div>
+            // вставляем  контент в card:
             card.innerHTML = `
                 <img src="${image}" class="card-image" width="384" height="213"
                 alt="${name}">
@@ -64,9 +67,16 @@ const menu = () => {
             `;
             //console.log(card);
 
-            card.querySelector('.button-card-text').addEventListener('click', () => { // обработчик кнпоки В Корзину на карточик блюда
-                addToCard({ name: name, price: price, id: id, count: 1 }); // дбалвяем объект в коризну
-            })
+            card.querySelector('.button-card-text').addEventListener('click', () => { // обработчик кнпоки В Корзину на карточке блюда
+                // const cardItem = { // блюдо
+                // name: name,
+                // price: price,
+                // count: 1
+                // }
+                //addToCard(cardItem);
+                //  либо короче написать:
+                addToCard({ name: name, price: price, id: id, count: 1 }); // добавляем объект в localStorage 
+            });
 
             cardsMenu.append(card); // добавляем текущее блюдо в конец  контенера cardsMenu
         });
@@ -76,7 +86,6 @@ const menu = () => {
 
 
     let url = localStorage.getItem('restaurant'); // забираем значнеие из localStorage по ключу restaurant
-
     if (url) {
         const restaurant = JSON.parse(url); // строку(объект ввиде строки) перевели в  объект
         //console.log(restaurant);
@@ -99,12 +108,12 @@ const menu = () => {
 
 
 
-    //   firebase нужен для эмуляции работы с сервером(облачное хранилище)
+    //   firebase нужен для эмуляции работы с сервером(облачное хранилище базы данных)
 
 }
 
 
 
-menu(); // если пишем код внури какой тоф укнци, то он будет виден и доступен  толко этой фукнции.те он инкапсулирован  вэтой ыукнции.  Т он не лияет на глоб облать видимости.  Если не рабоатем с модулями, то можно эту функию вызыват прям здсь
+menu(); // если пишем код внури какой то фукнци, то он будет виден и доступен  толко этой фукнции.те он инкапсулирован  вэтой фукнции.   он не влияет на глоб облать видимости.  Если не рабоатем с модулями, то можно эту функию вызыват прям здсь
 
-// занося кажый  код файла в фукнцию так мы обезопасиваем себя, это лучгая  практика, обепасим файл js дркг от друга
+// занося кажый  код файла в фукнцию так мы обезопасиваем себя, это лучшая  практика, обезопасим файл js друг от друга

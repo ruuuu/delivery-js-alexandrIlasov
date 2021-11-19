@@ -38,6 +38,17 @@ const auth = () => {
     const userName = document.querySelector('.user-name'); // место дял юзернейм
     const errorElem = document.querySelector('.error');
     const buttonCart = document.querySelector('.button-cart'); // нкопка Корзины
+    
+    
+    const TestLogin = (login) => {
+        if(/^[a-zA-Z1-9]+$/.test(login) === false) { alert('В логине долны быть только латинкие буквы') }
+        if(login.length < 4 || login.length > 20) { alert('В логине долны быть от 4 до 20 символов') }
+        if(parseInt(login.substr(0,1))) { alert('Логин должен начинаться с буквы') return false;}
+        
+        return true;
+    }
+    
+
 
     const login = (user) => { // фукнция Логина, принмиает объект
         buttonAuth.style.display = 'none';
@@ -47,6 +58,8 @@ const auth = () => {
         userName.textContent = user.login;
         modalAuth.style.display = 'none';
         console.log('userName.textContent', userName.textContent);
+        
+        
     }
 
 
@@ -58,12 +71,12 @@ const auth = () => {
         buttonOut.style.display = 'none';
         userName.textContent = '';
         buttonCart.style.display = 'none';
-        localStorage.removeItem('user'); // удаляем user из хранилища localstorage, чтоыб при разлгине, если обновим станицу, то имя чтоб не отображадь
+        localStorage.removeItem('user'); // удаляем user из хранилища localstorage, чтобы при разлогине, если обновим станицу, то имя чтоб не отображать
     }
 
 
 
-    buttonAuth.addEventListener('click', () => { //addEventListener - метод(слушаетль на ёлементе, он ожидает когда нажмут на кнопку), на кнпоку buttonAuth повеисли событие клика, после клика выполнится функция котрую передаем
+    buttonAuth.addEventListener('click', () => { // addEventListener - метод(слушаетль на элементе, он ожидает когда нажмут на кнопку), на кнпоку buttonAuth повеисли событие клика, после клика выполнится функция котрую передаем
         modalAuth.style.display = 'flex'; // elem.style.навание сво-тва = значение свойства
         // console.dir(modalAuth);
     });
@@ -82,8 +95,7 @@ const auth = () => {
     // у формы есть событие submit, это событие отправки формы:
     logInForm.addEventListener('submit', (evt) => { // evt-  объект события
         evt.preventDefault(); // отменяет действие по умолчнаию, это после отправки формы станица перезагружается
-        //console.dir(event);
-        //console.dir(inputLogin);
+
         const user = {
             login: inputLogin.value,
             password: inputPassword.value
