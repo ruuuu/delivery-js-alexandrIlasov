@@ -23,7 +23,6 @@ a{
     text-decoration: none;
 }
 
-
 img{
     max-width: 100;
     height: auto;
@@ -34,9 +33,17 @@ img{
     /*из макета ширина контента*/
     margin: 0 auto;
     /*ценртуем*/
+
+
     /*padding-left: 120px;
     padding-right: 120px;*/
 
+}
+
+
+img{
+    max-width: 100;
+    height: auto;
 }
 
 
@@ -52,6 +59,7 @@ img{
 
 .input {
     padding: 10px;
+    
     background-color: #FFFFFF;
     border: 1px solid #D9D9D9;
     box-sizing: border-box;
@@ -78,6 +86,7 @@ img{
     box-sizing: border-box;
     background-image: url("../img/icon/home.svg");
     background-size: 16px 16px;
+
 }
 
 
@@ -173,24 +182,6 @@ img{
     background-size: 800px 600px;
     margin-bottom: 56px;
 }
-
-.pizza {
-    background: #fff1b8 url(../img/promo/pizza.png) no-repeat top -100px right -250px / 830px
-}
-
-.kebab {
-    background: #D6E4FF url(../img/promo/kebab.png) no-repeat top 45px right 40px / 450px;
-}
-
-.vegetables {
-    background: #FFF566 url(../img/promo/vegetables.png) no-repeat top 0 right 0 / 825px
-}
-
-.sushi {
-    background: #FFF1F0 url(../img/promo/sushi.png) no-repeat top 10px right 15px / 500px
-}
-
-
 
 
 .promo-title {
